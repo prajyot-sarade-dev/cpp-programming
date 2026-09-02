@@ -2,39 +2,45 @@
 #include <string>
 using namespace std;
 
-class SavingAccount
+class CheckingAccount
 {
 private:
     string name;
     int accountNumber;
     double balance;
-    double interestRate;
+    double transactionFee;
 
 public:
 
     // Constructor
-    SavingAccount(string n, int accNo, double bal, double rate)
+    CheckingAccount(string n, int accNo, double bal, double fee)
     {
         name = n;
         accountNumber = accNo;
         balance = bal;
-        interestRate = rate;
+        transactionFee = fee;
     }
 
     // Deposit
     void deposit(double amount)
     {
         balance = balance + amount;
+
         cout << "Deposited: " << amount << endl;
     }
 
     // Withdrawal
     void withdraw(double amount)
     {
-        if (amount <= balance)
+        double total = amount + transactionFee;
+
+        if (total <= balance)
         {
-            balance = balance - amount;
+            balance = balance - total;
+
             cout << "Withdrawn: " << amount << endl;
+            cout << "Transaction Fee: " << transactionFee << endl;
+            cout << "Total Deducted: " << total << endl;
         }
         else
         {
@@ -42,40 +48,26 @@ public:
         }
     }
 
-    // Interest Calculation
-    void calculateInterest()
-    {   double beforeintrest=balance;
-        double interest = balance * interestRate / 100;
-       
-        balance = balance + interest;
-        cout<<"Balence before intrest==>"<<beforeintrest<<endl;
-
-
-        cout << "Interest Added: " << interest << endl;
-        cout<<"Balance  after intrest==>"<<balance<<endl;
-    }
-
     // Account Statement
     void statement()
     {
-        cout << "\n----- ACCOUNT STATEMENT -----" << endl;
+        cout << "\n----- CHECKING ACCOUNT STATEMENT -----" << endl;
+
         cout << "Name: " << name << endl;
         cout << "Account Number: " << accountNumber << endl;
         cout << "Balance: " << balance << endl;
-        cout << "Interest Rate: " << interestRate << "%" << endl;
+        cout << "Transaction Fee: " << transactionFee << endl;
     }
 };
 
 int main()
 {
     // Creating object
-    SavingAccount account("Prajyot", 101, 10000, 5);
+    CheckingAccount account("Prajyot", 102, 15000, 50);
 
     account.deposit(2000);
 
     account.withdraw(1000);
-
-    account.calculateInterest();
 
     account.statement();
 
