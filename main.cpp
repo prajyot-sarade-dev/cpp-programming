@@ -1,97 +1,76 @@
 #include <iostream>
 using namespace std;
 
-class Student
+class Circle
 {
-protected:
-    int rollNo;
-    string name;
+    float radius;
 
 public:
-    void getStudent()
+    void getData()
     {
-        cout << "Enter Roll No: ";
-        cin >> rollNo;
-
-        cout << "Enter Name: ";
-        cin >> name;
+        cout << "Enter radius: ";
+        cin >> radius;
     }
 
-    void displayStudent()
+    float operator+()
     {
-        cout << "Roll No: " << rollNo << endl;
-        cout << "Name: " << name << endl;
+        return 3.14 * radius * radius;
     }
 };
 
-class StudentExam : public Student
+class Rectangle
 {
-protected:
-    int marks[5];
+    float length, breadth;
 
 public:
-    void getMarks()
+    void getData()
     {
-        cout << "Enter marks of 5 subjects:" << endl;
+        cout << "Enter length: ";
+        cin >> length;
 
-        for(int i = 0; i < 5; i++)
-        {
-            cin >> marks[i];
-        }
+        cout << "Enter breadth: ";
+        cin >> breadth;
     }
 
-    void displayMarks()
+    float operator+()
     {
-        cout << "Marks: ";
-
-        for(int i = 0; i < 5; i++)
-        {
-            cout << marks[i] << " ";
-        }
-
-        cout << endl;
+        return length * breadth;
     }
 };
 
-class StudentResult : public StudentExam
+class Triangle
 {
-private:
-    int total;
-    float percentage;
+    float base, height;
 
 public:
-    void calculateResult()
+    void getData()
     {
-        total = 0;
+        cout << "Enter base: ";
+        cin >> base;
 
-        for(int i = 0; i < 5; i++)
-        {
-            total = total + marks[i];
-        }
-
-        percentage = total / 5.0;
+        cout << "Enter height: ";
+        cin >> height;
     }
 
-    void displayResult()
+    float operator+()
     {
-        displayStudent();
-        displayMarks();
-
-        cout << "Total Marks: " << total << endl;
-        cout << "Percentage: " << percentage << "%" << endl;
+        return 0.5 * base * height;
     }
 };
 
 int main()
 {
-    StudentResult s;
+    Circle c;
+    Rectangle r;
+    Triangle t;
 
-    s.getStudent();
-    s.getMarks();
-    s.calculateResult();
+    c.getData();
+    r.getData();
+    t.getData();
 
-    cout << "\n----- Student Result -----" << endl;
-    s.displayResult();
+    cout << "\nArea of Circle = " << +c << endl;
+    cout << "Area of Rectangle = " << +r << endl;
+    cout << "Area of Triangle = " << +t << endl;
 
     return 0;
 }
