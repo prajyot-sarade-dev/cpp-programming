@@ -1,67 +1,87 @@
 #include <iostream>
 using namespace std;
 
-class Complex
+class LibraryItem
 {
-    int real, imag;
+protected:
+    int itemId;
+    string title;
 
 public:
-    void getData()
+    void getItem()
     {
-        cout << "Enter real part: ";
-        cin >> real;
+        cout << "Enter Item ID: ";
+        cin >> itemId;
 
-        cout << "Enter imaginary part: ";
-        cin >> imag;
+        cout << "Enter Title: ";
+        cin >> title;
     }
 
-    // Binary + operator
-    Complex operator+(Complex c)
+    void displayItem()
     {
-        Complex temp;
+        cout << "Item ID: " << itemId << endl;
+        cout << "Title: " << title << endl;
+    }
+};
 
-        temp.real = real + c.real;
-        temp.imag = imag + c.imag;
+class Book : public LibraryItem
+{
+private:
+    string author;
 
-        return temp;
+public:
+    void getBook()
+    {
+        getItem();
+
+        cout << "Enter Author: ";
+        cin >> author;
     }
 
-    // Binary - operator
-    Complex operator-(Complex c)
+    void displayBook()
     {
-        Complex temp;
+        displayItem();
+        cout << "Author: " << author << endl;
+    }
+};
 
-        temp.real = real - c.real;
-        temp.imag = imag - c.imag;
+class Magazine : public LibraryItem
+{
+private:
+    int issueNo;
 
-        return temp;
+public:
+    void getMagazine()
+    {
+        getItem();
+
+        cout << "Enter Issue Number: ";
+        cin >> issueNo;
     }
 
-    void display()
+    void displayMagazine()
     {
-        cout << real << " + " << imag << "i" << endl;
+        displayItem();
+        cout << "Issue Number: " << issueNo << endl;
     }
 };
 
 int main()
 {
-    Complex c1, c2, c3;
+    Book b;
+    Magazine m;
 
-    cout << "Enter first complex number:" << endl;
-    c1.getData();
+    cout << "----- Enter Book Details -----" << endl;
+    b.getBook();
 
-    cout << "\nEnter second complex number:" << endl;
-    c2.getData();
+    cout << "\n----- Enter Magazine Details -----" << endl;
+    m.getMagazine();
 
-    c3 = c1 + c2;
+    cout << "\n----- Book Details -----" << endl;
+    b.displayBook();
 
-    cout << "\nAddition = ";
-    c3.display();
-
-    c3 = c1 - c2;
-
-    cout << "Subtraction = ";
-    c3.display();
+    cout << "\n----- Magazine Details -----" << endl;
+    m.displayMagazine();
 
     return 0;
 }
