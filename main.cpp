@@ -1,87 +1,97 @@
 #include <iostream>
 using namespace std;
 
-class LibraryItem
+class Student
 {
 protected:
-    int itemId;
-    string title;
+    int rollNo;
+    string name;
 
 public:
-    void getItem()
+    void getStudent()
     {
-        cout << "Enter Item ID: ";
-        cin >> itemId;
+        cout << "Enter Roll No: ";
+        cin >> rollNo;
 
-        cout << "Enter Title: ";
-        cin >> title;
+        cout << "Enter Name: ";
+        cin >> name;
     }
 
-    void displayItem()
+    void displayStudent()
     {
-        cout << "Item ID: " << itemId << endl;
-        cout << "Title: " << title << endl;
+        cout << "Roll No: " << rollNo << endl;
+        cout << "Name: " << name << endl;
     }
 };
 
-class Book : public LibraryItem
+class StudentExam : public Student
 {
-private:
-    string author;
+protected:
+    int marks[5];
 
 public:
-    void getBook()
+    void getMarks()
     {
-        getItem();
+        cout << "Enter marks of 5 subjects:" << endl;
 
-        cout << "Enter Author: ";
-        cin >> author;
+        for(int i = 0; i < 5; i++)
+        {
+            cin >> marks[i];
+        }
     }
 
-    void displayBook()
+    void displayMarks()
     {
-        displayItem();
-        cout << "Author: " << author << endl;
+        cout << "Marks: ";
+
+        for(int i = 0; i < 5; i++)
+        {
+            cout << marks[i] << " ";
+        }
+
+        cout << endl;
     }
 };
 
-class Magazine : public LibraryItem
+class StudentResult : public StudentExam
 {
 private:
-    int issueNo;
+    int total;
+    float percentage;
 
 public:
-    void getMagazine()
+    void calculateResult()
     {
-        getItem();
+        total = 0;
 
-        cout << "Enter Issue Number: ";
-        cin >> issueNo;
+        for(int i = 0; i < 5; i++)
+        {
+            total = total + marks[i];
+        }
+
+        percentage = total / 5.0;
     }
 
-    void displayMagazine()
+    void displayResult()
     {
-        displayItem();
-        cout << "Issue Number: " << issueNo << endl;
+        displayStudent();
+        displayMarks();
+
+        cout << "Total Marks: " << total << endl;
+        cout << "Percentage: " << percentage << "%" << endl;
     }
 };
 
 int main()
 {
-    Book b;
-    Magazine m;
+    StudentResult s;
 
-    cout << "----- Enter Book Details -----" << endl;
-    b.getBook();
+    s.getStudent();
+    s.getMarks();
+    s.calculateResult();
 
-    cout << "\n----- Enter Magazine Details -----" << endl;
-    m.getMagazine();
-
-    cout << "\n----- Book Details -----" << endl;
-    b.displayBook();
-
-    cout << "\n----- Magazine Details -----" << endl;
-    m.displayMagazine();
+    cout << "\n----- Student Result -----" << endl;
+    s.displayResult();
 
     return 0;
 }
